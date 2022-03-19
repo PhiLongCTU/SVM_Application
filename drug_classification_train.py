@@ -14,7 +14,7 @@ le=LabelEncoder()
 for column in nom_cols:
     
     df[column]=le.fit_transform(df[column])
-
+print(df.head(40))
 #print(df.head)
 # split test and train
 X = df.drop('Drug', axis=1)
@@ -32,6 +32,7 @@ def test_model(c,kernel,gamma):
             model = SVC(C = c,kernel= kernel,gamma=gamma)   
         model.fit(X_train, y_train.values.ravel())
         y_pred = model.predict(X_test)
+        print(accuracy_score(y_test, y_pred))
         avg_score.append(accuracy_score(y_test, y_pred))
     avg_score = pd.Series(avg_score)    
     return avg_score.mean()*100 

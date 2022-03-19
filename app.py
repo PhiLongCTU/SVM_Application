@@ -17,10 +17,11 @@ def classify_type():
         cholesterol = request.args.get('select_cholesterol') # 
         bp = request.args.get('select_bp') #  lấy dữ liệu từ trang home sau khi submit
         pred_dict = dict()
-        pred_dict = {'0': 'DrugY', '1': 'drugA', '2':'drugC',  '3':'drugB', '4':'drugX' }
+        pred_dict = {'0': 'DrugY', '1': 'drugA', '3':'drugC',  '2':'drugB', '4':'drugX' }
         #get model
         model = pickle.load(open('model.pkl','rb')) # load mô hình
-        pred = model.predict([[age, na_to_k, sex, cholesterol, bp]]) # dự báo với dữ liệu lấy được
+        pred = model.predict([[age, sex, bp, cholesterol, na_to_k]]) # dự báo với dữ liệu lấy được
+        print(pred)
         temp = ''
         for key,value in pred_dict.items():    
             if int(key) == pred:
